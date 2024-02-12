@@ -1,8 +1,8 @@
 import argparse
 import os
 import time
-from classes.log import CustomLogger
-from classes.folder_operations import FolderSynchronizer
+from folder_synchronizer.classes.log import CustomLogger
+from folder_synchronizer.classes.folder_operations import FolderSynchronizer
 
 
 def parse_args():
