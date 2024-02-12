@@ -40,7 +40,7 @@ To run the program, it requires the following arguments:
 
 Example of execution:
 
-    python main.py --sourceDir <sourceDir> --replicaDir <replicaDir> --logFolder <logFolder> --syncInterval <syncInterval>
+    python folder_synchronizer.main --sourceDir <sourceDir> --replicaDir <replicaDir> --logFolder <logFolder> --syncInterval <syncInterval>
 
 
 ## Project Structure
