@@ -36,11 +36,10 @@ To run the program, it requires the following arguments:
 - sourceDir: Complete directory path of the source folder.
 - replicaDir: Complete directory path of the replica folder.
 - logFolder: Complete directory path of the log folder.
-- syncInterval: Synchronization interval in seconds.
 
 Example of execution:
 
-    python folder_synchronizer.main --sourceDir <sourceDir> --replicaDir <replicaDir> --logFolder <logFolder> --syncInterval <syncInterval>
+    python -m folder_synchronizer --sourceDir <sourceDir> --replicaDir <replicaDir> --logFolder <logFolder>
 
 
 ## Project Structure
@@ -75,7 +74,5 @@ To execute the tests, it can be used the pytest package with the simple command:
 
 ## Final Notes
     
-Lastelly, the "scheduler" was implemented inside the python program (infinite loop) to have a fully functional program. 
-
-But the "shedulder" may be implemented on a CI/CD tool. For example, could be implemented a jenkins job to run the python program and that job can be schedule to execute periodically, out of the box.
+To make this task periodically, one may implement the "scheduler" on a CI/CD tool. For example, could be implemented a jenkins job to run the python program and that job can be schedule to execute periodically, out of the box.
 - This approach would be a more scalable and manageable solution.

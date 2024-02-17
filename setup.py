@@ -10,7 +10,7 @@ setup(
     install_requires=requirements,
     entry_points={
         'console_scripts': [
-            'folder_synchronizer = folder_synchronizer.main:main',
+            'folder_synchronizer = folder_synchronizer.__main__:main',
         ],
     },
     author='Jorge Ribeiro',
