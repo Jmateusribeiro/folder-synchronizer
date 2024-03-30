@@ -44,10 +44,17 @@ jobs:
 
       - name: Run Tests with Coverage
         run: |
-          coverage run -m pytest --cov=my_module --cov-report=html tests
+          coverage run -m pytest --html=report.html
 
-      - name: Upload HTML Coverage Report
-        uses: actions/upload-artifact@v2
+      - name: Run Tests and Collect Coverage
+        run: |
+          COVERAGE_FILE=coverage/.coverage.${{ runner.os }}-py${{ matrix.python-version }}
+          CONTEXT=${{ runner.os }}-py${{ matrix.python-version }}
+          coverage run -m pytest --html=report.html
+
+      - name: Store Coverage Files
+        if: always()
+        uses: actions/upload-artifact@v3
         with:
-          name: coverage-report
-          path: ./htmlcov
+          name: python-coverage-${{ matrix.python-version }}
+          path: coverage
