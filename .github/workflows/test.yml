@@ -36,8 +36,8 @@ jobs:
 
       - name: Install Coverage and Pytest
         run: |
-         python -m pip install coverage
-         python -m pip install pytest
+          python -m pip install coverage
+          python -m pip install pytest
 
       - name: Create Coverage Directory
         run: mkdir -p coverage
@@ -48,9 +48,15 @@ jobs:
           CONTEXT=${{ runner.os }}-py${{ matrix.python-version }}
           coverage run -m pytest tests
 
-      - name: Store Coverage Files
+      - name: Zip Coverage Files
+        if: always()
+        run: |
+          ls -lR coverage  # Debugging: List files in coverage directory
+          zip -r coverage.zip coverage  # Debugging: Zip coverage directory for inspection
+      
+      - name:  Store Coverage Files
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: python-coverage-${{ matrix.python-version }}
-          path: coverage
+          path: coverage.zip  # Upload the zip file containing coverage files
