@@ -47,7 +47,6 @@ jobs:
           COVERAGE_FILE=coverage/.coverage.${{ runner.os }}-py${{ matrix.python-version }}
           CONTEXT=${{ runner.os }}-py${{ matrix.python-version }}
           coverage run -m pytest tests
-          coverage combine
 
       - name: Store Coverage Files
         if: always()
