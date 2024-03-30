@@ -1,6 +1,6 @@
 # Folder Synchronizer
 
-[![Unit Tests](https://img.shields.io/github/workflow/status/Jmateusribeiro/folder-synchronizer/test?label=Unit%20Tests)](https://github.com/Jmateusribeiro/folder-synchronizer/actions/workflows/test.yml)
+[![Unit Tests](https://github.com/Jmateusribeiro/folder-synchronizer/actions/workflows/test.yml/badge.svg)](https://github.com/Jmateusribeiro/folder-synchronizer/actions/workflows/test.yml)
 
 ## Goal
     
