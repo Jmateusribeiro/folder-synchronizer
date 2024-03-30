@@ -42,21 +42,12 @@ jobs:
       - name: Create Coverage Directory
         run: mkdir -p coverage
 
-      - name: Run Tests and Collect Coverage
+      - name: Run Tests with Coverage
         run: |
-          COVERAGE_FILE=coverage/.coverage.${{ runner.os }}-py${{ matrix.python-version }}
-          CONTEXT=${{ runner.os }}-py${{ matrix.python-version }}
-          coverage run -m pytest tests
+          coverage run -m pytest --cov=my_module --cov-report=html tests
 
-      - name: Zip Coverage Files
-        if: always()
-        run: |
-          ls -lR coverage  # Debugging: List files in coverage directory
-          zip -r coverage.zip coverage  # Debugging: Zip coverage directory for inspection
-      
-      - name:  Store Coverage Files
-        if: always()
-        uses: actions/upload-artifact@v3
+      - name: Upload HTML Coverage Report
+        uses: actions/upload-artifact@v2
         with:
-          name: python-coverage-${{ matrix.python-version }}
-          path: coverage.zip  # Upload the zip file containing coverage files
+          name: coverage-report
+          path: ./htmlcov
