@@ -1,15 +1,18 @@
+"""
+    unit tests
+"""
+
 import os
+import sys
 import shutil
 from unittest.mock import Mock
 import pytest
-import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from folder_synchronizer.classes.folder_operations import FolderSynchronizer
 
 source_folder = 'test_source_folder'
 replica_folder = 'test_replica_folder'
 log = Mock()
-
 
 @pytest.fixture(scope="module", autouse=True)
 def create_folders(request):
@@ -28,11 +31,9 @@ def create_folders(request):
     
     request.addfinalizer(teardown)
 
-
 @pytest.fixture(scope="function")
 def folder_sync():
     return FolderSynchronizer(source_folder, replica_folder, log)
-
 
 def test_synchronize_nonexistent_source_folder():
 
@@ -40,7 +41,6 @@ def test_synchronize_nonexistent_source_folder():
 
     with pytest.raises(FileNotFoundError):
         folder_sync.synchronize()
-
 
 def test_synchronize_create_replica_folder():
      
@@ -54,7 +54,6 @@ def test_synchronize_create_replica_folder():
     shutil.rmtree(custom_replica_folder)
     assert not os.path.exists(custom_replica_folder)
 
-
 def test_synchronize_remove_folder(folder_sync):
 
     # Create a folder in replica folder (to be removed by 'synchronize' method)
@@ -64,7 +63,6 @@ def test_synchronize_remove_folder(folder_sync):
     folder_sync.synchronize()
 
     assert not os.path.exists(empty_folder)
-
 
 def test_synchronize_remove_file(folder_sync):
 
@@ -78,7 +76,6 @@ def test_synchronize_remove_file(folder_sync):
 
     assert not os.path.exists(empty_file)
 
-
 def test_synchronize_create_folder(folder_sync):
 
     folder_name = 'folder_creation/folder/folder'
@@ -90,7 +87,6 @@ def test_synchronize_create_folder(folder_sync):
     # Even though the folder was created on source
     # needs to be checked on the replica
     assert os.path.exists(os.path.join(replica_folder, folder_name))
-
 
 def test_synchronize_create_file(folder_sync):
 
@@ -105,7 +101,6 @@ def test_synchronize_create_file(folder_sync):
     # Even though the file was created on source
     # needs to be checked on the replica
     assert os.path.exists(os.path.join(replica_folder, file_name))
-
 
 def test_synchronize_update_file(folder_sync):
 

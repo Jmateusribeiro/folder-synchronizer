@@ -1,3 +1,6 @@
+"""
+    folder scynchronizer class
+"""
 import os
 import filecmp
 import shutil
@@ -12,7 +15,6 @@ class FolderSynchronizer:
         self.log = log
 
     def synchronize(self):
-
         # If source folder don't exists should be thrown error
         # but if replica folder don't exists must be created
         if not os.path.exists(self.source_folder):
@@ -83,4 +85,4 @@ class FolderSynchronizer:
                         self.log.error(f"Error: Source file not found: {source_item_path}")
                 except Exception as e:
                     raise Exception(f"Error creatig item '{source_item_path}' - {str(e)}")
-                
+              

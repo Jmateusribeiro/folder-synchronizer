@@ -1,3 +1,6 @@
+"""
+    setup file
+"""
 from setuptools import setup, find_packages
 
 with open('requirements.txt') as f:
@@ -10,7 +13,7 @@ setup(
     install_requires=requirements,
     entry_points={
         'console_scripts': [
-            'folder_synchronizer = folder_synchronizer.__main__:main',
+            'folder_synchronizer = folder_synchronizer.__main__:__main__',
         ],
     },
     author='Jorge Ribeiro',

@@ -1,1 +1,4 @@
-from .main import main
+"""
+    init file
+"""
+from .__main__ import main
