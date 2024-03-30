@@ -1,4 +1,4 @@
-name: Python Test and Coverage
+name: Unit Tests
 
 on:
   push:
@@ -37,7 +37,7 @@ jobs:
       - name: Install Coverage and Pytest
         run: |
          python -m pip install coverage
-         python -m pip install coverage
+         python -m pip install pytest
 
       - name: Create Coverage Directory
         run: mkdir -p coverage
