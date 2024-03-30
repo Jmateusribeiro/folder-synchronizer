@@ -1,5 +1,7 @@
 # Folder Synchronizer
 
+[![Unit Tests](https://github.com/Jmateusribeiro/folder-synchronizer/actions/workflows/test.yml/badge.svg)](https://github.com/Jmateusribeiro/folder-synchronizer/actions/workflows/test.yml)
+
 ## Goal
     
     Implement a pythom program to perform folder synchronization
