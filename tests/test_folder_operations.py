@@ -39,7 +39,6 @@ def test_synchronize_nonexistent_source_folder():
 
     folder_sync = FolderSynchronizer('nonexistent_source', replica_folder, log)
 
-    assert 1 == 2
     with pytest.raises(FileNotFoundError):
         folder_sync.synchronize()
 
