@@ -1,14 +1,17 @@
-"""
-    main module
-"""
 import argparse
 import os
 from folder_synchronizer.classes.log import CustomLogger
 from folder_synchronizer.classes.folder_operations import FolderSynchronizer
 
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--sourceDir", 
+def parse_args() -> argparse.Namespace:
+    """
+    Parses command-line arguments.
+
+    Returns:
+        argparse.Namespace: Parsed command-line arguments.
+    """
+    parser = argparse.ArgumentParser(description="Synchronize folders and log the process.")
+    parser.add_argument("--sourceDir",
                         type=str,
                         help="Complete Directory of Source folder",
                         required=True)
@@ -22,7 +25,10 @@ def parse_args():
                         required=True)
     return parser.parse_args()
 
-def main():
+def main() -> None:
+    """
+    Main function to synchronize source and replica folders and log the process.
+    """
     args = parse_args()
     
     source_folder = args.sourceDir
@@ -40,7 +46,7 @@ def main():
     folder_sync = FolderSynchronizer(source_folder, replica_folder, log)
     
     try:
-        log.info("...Strating Synchronization...")
+        log.info("...Starting Synchronization...")
         folder_sync.synchronize()
         log.info("...Folders Synchronized...")
     except Exception as e:
