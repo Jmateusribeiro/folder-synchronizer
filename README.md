@@ -1,6 +1,6 @@
 # Folder Synchronizer
 
-[![Unit Tests](https://github.com/Jmateusribeiro/folder-synchronizer/actions/workflows/test.yml/badge.svg)](https://github.com/Jmateusribeiro/folder-synchronizer/actions/workflows/test.yml)
+[![Unit Tests](https://github.com/Jmateusribeiro/folder-synchronizer/actions/workflows/test.yml/badge.svg)](https://github.com/Jmateusribeiro/folder-synchronizer/actions/workflows/test.yml) [![Pylint](https://github.com/Jmateusribeiro/folder-synchronizer/actions/workflows/pylint.yml/badge.svg)](https://github.com/Jmateusribeiro/folder-synchronizer/actions/workflows/pylint.yml)
 
 ## Goal
     
