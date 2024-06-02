@@ -73,7 +73,7 @@ def test_synchronize_create_replica_folder() -> None:
     shutil.rmtree(custom_replica_folder)
     assert not os.path.exists(custom_replica_folder)
 
-def test_synchronize_remove_folder(folder_sync: 'FolderSynchronizer') -> None:
+def test_synchronize_remove_folder(folder_sync) -> None:
     """
     Test that a folder in the replica that does not exist in the source is removed.
     """
@@ -84,7 +84,7 @@ def test_synchronize_remove_folder(folder_sync: 'FolderSynchronizer') -> None:
 
     assert not os.path.exists(empty_folder)
 
-def test_synchronize_remove_file(folder_sync: 'FolderSynchronizer') -> None:
+def test_synchronize_remove_file(folder_sync) -> None:
     """
     Test that a file in the replica that does not exist in the source is removed.
     """
@@ -98,7 +98,7 @@ def test_synchronize_remove_file(folder_sync: 'FolderSynchronizer') -> None:
 
     assert not os.path.exists(empty_file)
 
-def test_synchronize_create_folder(folder_sync: 'FolderSynchronizer') -> None:
+def test_synchronize_create_folder(folder_sync) -> None:
     """
     Test that a folder in the source is copied to the replica.
     """
@@ -109,7 +109,7 @@ def test_synchronize_create_folder(folder_sync: 'FolderSynchronizer') -> None:
 
     assert os.path.exists(os.path.join(REPLICA_FOLDER, folder_name))
 
-def test_synchronize_create_file(folder_sync: 'FolderSynchronizer') -> None:
+def test_synchronize_create_file(folder_sync) -> None:
     """
     Test that a file in the source is copied to the replica.
     """
@@ -123,7 +123,7 @@ def test_synchronize_create_file(folder_sync: 'FolderSynchronizer') -> None:
 
     assert os.path.exists(os.path.join(REPLICA_FOLDER, file_name))
 
-def test_synchronize_update_file(folder_sync: 'FolderSynchronizer') -> None:
+def test_synchronize_update_file(folder_sync) -> None:
     """
     Test that a file in the replica is updated to match the source.
     """
