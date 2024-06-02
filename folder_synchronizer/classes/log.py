@@ -1,11 +1,36 @@
+"""
+A custom logger class that logs messages to both console and file with timed rotation.
+"""
 import logging
 import re
 from logging import handlers, Logger
-
+import os
 
 class CustomLogger(Logger):
+    """
+    A custom logger class that logs messages to both console and file with timed rotation.
 
-    def __init__(self, log_folder, backupCount_days=30):
+    This class extends the standard Logger class 
+    from the logging module and provides additional functionality
+    for logging messages to both console and file. 
+    Log files are rotated daily, and old log files are automatically
+    deleted after a specified number of days.
+
+    Attributes:
+        log_folder (str): The directory where log files will be stored.
+        backupCount_days (int): The number of days to keep backup log files.
+
+    Methods:
+        __init__: Initializes the custom logger.
+    """
+    def __init__(self, log_folder: str, backupCount_days: int = 30) -> None:
+        """
+        Initializes the custom logger.
+
+        Args:
+            log_folder (str): The directory where log files will be stored.
+            backupCount_days (int): The number of days to keep backup log files.
+        """
         super().__init__('CustomLogger')
         self.setLevel(logging.DEBUG)
 
@@ -18,9 +43,8 @@ class CustomLogger(Logger):
         self.addHandler(console_handler)
 
         # File handler (with timed rotation each day)
-        # Think is better to have a log file per day
         file_handler = handlers.TimedRotatingFileHandler(
-            log_folder + '\\Folder_Sync',
+            os.path.join(log_folder, 'Folder_Sync'),
             when='midnight',
             backupCount=backupCount_days
         )
