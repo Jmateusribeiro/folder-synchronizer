@@ -1,26 +1,24 @@
 """
     main module
 """
-
 import argparse
 import os
 from folder_synchronizer.classes.log import CustomLogger
 from folder_synchronizer.classes.folder_operations import FolderSynchronizer
 
-
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--sourceDir", 
-                        type=str, 
-                        help="Complete Directory of Source folder", 
+                        type=str,
+                        help="Complete Directory of Source folder",
                         required=True)
-    parser.add_argument("--replicaDir", 
-                        type=str, 
-                        help="Complete Directory of Replica folder", 
+    parser.add_argument("--replicaDir",
+                        type=str,
+                        help="Complete Directory of Replica folder",
                         required=True)
-    parser.add_argument("--logFolder", 
-                        type=str, 
-                        help="Complete Directory of Log folder", 
+    parser.add_argument("--logFolder",
+                        type=str,
+                        help="Complete Directory of Log folder",
                         required=True)
     return parser.parse_args()
 
@@ -39,7 +37,7 @@ def main():
     log.info("### Folder Synchronization ###")
     log.info(f"Source Folder: {source_folder}")
     log.info(f"Replica Folder: {replica_folder}")
-    folder_sync = FolderSynchronizer(source_folder, replica_folder, log)  
+    folder_sync = FolderSynchronizer(source_folder, replica_folder, log)
     
     try:
         log.info("...Strating Synchronization...")
