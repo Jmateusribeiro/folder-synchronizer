@@ -10,8 +10,10 @@ class CustomLogger(Logger):
     """
     A custom logger class that logs messages to both console and file with timed rotation.
 
-    This class extends the standard Logger class from the logging module and provides additional functionality
-    for logging messages to both console and file. Log files are rotated daily, and old log files are automatically
+    This class extends the standard Logger class 
+    from the logging module and provides additional functionality
+    for logging messages to both console and file. 
+    Log files are rotated daily, and old log files are automatically
     deleted after a specified number of days.
 
     Attributes:

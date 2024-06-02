@@ -42,10 +42,10 @@ class FolderSynchronizer:
             os.makedirs(self.replica_folder)
             self.log.warning(f"Replica folder was created: {self.replica_folder}")
 
-        self.__remove_items()
-        self.__create_or_update_items()
+        self.remove_items()
+        self.create_or_update_items()
 
-    def __remove_items(self) -> None:
+    def remove_items(self) -> None:
         """
         Removes items from the replica folder that do not exist in the source folder.
         """
@@ -64,7 +64,7 @@ class FolderSynchronizer:
             except Exception as e:
                 raise Exception(f"Error removing '{replica_item_path}' - {str(e)}") from e
 
-    def __create_or_update_items(self) -> None:
+    def create_or_update_items(self) -> None:
         """
         Creates or updates items in the replica folder to match the source folder.
         """
@@ -79,8 +79,8 @@ class FolderSynchronizer:
 
             elif os.path.isfile(source_item_path):
                 try:
-                    if os.path.exists(replica_item_path) and filecmp.cmp(source_item_path, 
-                                                                         replica_item_path, shallow=False):
+                    if os.path.exists(replica_item_path) and filecmp.cmp(source_item_path,
+                            replica_item_path, shallow=False):
                         continue
 
                     if os.path.exists(source_item_path):
