@@ -37,7 +37,7 @@ class FolderSynchronizer:
         """
         if not os.path.exists(self.source_folder):
             raise FileNotFoundError(f"Source folder not found: {self.source_folder}")
-    
+
         if not os.path.exists(self.replica_folder):
             os.makedirs(self.replica_folder)
             self.log.warning(f"Replica folder was created: {self.replica_folder}")
@@ -50,7 +50,7 @@ class FolderSynchronizer:
         Removes items from the replica folder that do not exist in the source folder.
         """
         for replica_item_path in self.replica_folder.rglob('*'):
-            source_item_path = os.path.join(self.source_folder, 
+            source_item_path = os.path.join(self.source_folder,
                                             os.path.relpath(replica_item_path, self.replica_folder))
             try:
                 if not os.path.exists(source_item_path):
@@ -62,24 +62,25 @@ class FolderSynchronizer:
                         self.log.info(f"Removed Folder: {replica_item_path}")
 
             except Exception as e:
-                raise Exception(f"Error removing '{replica_item_path}' - {str(e)}")
-   
+                raise Exception(f"Error removing '{replica_item_path}' - {str(e)}") from e
+
     def __create_or_update_items(self) -> None:
         """
         Creates or updates items in the replica folder to match the source folder.
         """
         for source_item_path in self.source_folder.rglob('*'):
-            replica_item_path = os.path.join(self.replica_folder, 
+            replica_item_path = os.path.join(self.replica_folder,
                                             os.path.relpath(source_item_path, self.source_folder))
 
             if os.path.isdir(source_item_path):
                 if not os.path.exists(replica_item_path):
                     os.makedirs(replica_item_path)
                     self.log.info(f"Created folder: {replica_item_path}")
-                
+
             elif os.path.isfile(source_item_path):
                 try:
-                    if os.path.exists(replica_item_path) and filecmp.cmp(source_item_path, replica_item_path, shallow=False):
+                    if os.path.exists(replica_item_path) and filecmp.cmp(source_item_path, 
+                                                                         replica_item_path, shallow=False):
                         continue
 
                     if os.path.exists(source_item_path):
@@ -91,12 +92,13 @@ class FolderSynchronizer:
                             message = f"Copied file: {source_item_path}"
 
                         shutil.copy2(source_item_path, replica_item_path)
-                        
+
                         # logging after the action was really performed
-                        # but need to "catch" the action before 
+                        # but need to "catch" the action before
                         # to understand if was a create or update action
                         self.log.info(message)
                     else:
                         self.log.error(f"Error: Source file not found: {source_item_path}")
                 except Exception as e:
-                    raise Exception(f"Error creating or updating item '{source_item_path}' - {str(e)}")
+                    error_msg = f"Error creating or updating item '{source_item_path}' - {str(e)}"
+                    raise Exception(error_msg) from e

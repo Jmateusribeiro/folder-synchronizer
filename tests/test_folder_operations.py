@@ -40,8 +40,8 @@ def create_folders(request: FixtureRequest) -> None:
     # Register the teardown function to be called after tests
     request.addfinalizer(teardown)
 
-@pytest.fixture(scope="function")
-def folder_sync() -> FolderSynchronizer:
+@pytest.fixture(scope="function", name="folder_sync")
+def define_folder_sync() -> FolderSynchronizer:
     """
     Fixture to provide a FolderSynchronizer instance for each test function.
 
@@ -54,19 +54,19 @@ def test_synchronize_nonexistent_source_folder() -> None:
     """
     Test synchronizing a non-existent source folder raises FileNotFoundError.
     """
-    folder_sync_test = FolderSynchronizer('nonexistent_source', REPLICA_FOLDER, log)
+    folder_sync = FolderSynchronizer('nonexistent_source', REPLICA_FOLDER, log)
 
     with pytest.raises(FileNotFoundError):
-        folder_sync_test.synchronize()
+        folder_sync.synchronize()
 
 def test_synchronize_create_replica_folder() -> None:
     """
     Test that the replica folder is created if it does not exist.
     """
     custom_replica_folder = 'custom_replica_folder'
-    folder_sync_test = FolderSynchronizer(SOURCE_FOLDER, custom_replica_folder, log)
+    folder_sync = FolderSynchronizer(SOURCE_FOLDER, custom_replica_folder, log)
 
-    folder_sync_test.synchronize()
+    folder_sync.synchronize()
 
     assert os.path.exists(custom_replica_folder)
 
