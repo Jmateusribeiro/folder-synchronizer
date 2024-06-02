@@ -1,16 +1,12 @@
+"""
+A custom logger class that logs messages to both console and file with timed rotation.
+"""
 import logging
 import re
 from logging import handlers, Logger
 import os
 
 class CustomLogger(Logger):
-    """
-    A custom logger class that logs messages to both console and file with timed rotation.
-
-    Attributes:
-        log_folder (str): Directory where log files will be stored.
-        backupCount_days (int): Number of backup log files to keep.
-    """
 
     def __init__(self, log_folder: str, backupCount_days: int = 30) -> None:
         """

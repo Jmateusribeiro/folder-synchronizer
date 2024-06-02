@@ -1,9 +1,11 @@
+"""
+unit tests
+"""
 import os
 import sys
 import shutil
 from unittest.mock import Mock
 import pytest
-from typing import Generator
 from _pytest.fixtures import FixtureRequest
 
 # Adding the folder containing the folder_operations module to the path
@@ -52,19 +54,19 @@ def test_synchronize_nonexistent_source_folder() -> None:
     """
     Test synchronizing a non-existent source folder raises FileNotFoundError.
     """
-    folder_sync = FolderSynchronizer('nonexistent_source', replica_folder, log)
+    folder_sync_test = FolderSynchronizer('nonexistent_source', replica_folder, log)
 
     with pytest.raises(FileNotFoundError):
-        folder_sync.synchronize()
+        folder_sync_test.synchronize()
 
 def test_synchronize_create_replica_folder() -> None:
     """
     Test that the replica folder is created if it does not exist.
     """
     custom_replica_folder = 'custom_replica_folder'
-    folder_sync = FolderSynchronizer(source_folder, custom_replica_folder, log)
+    folder_sync_test = FolderSynchronizer(source_folder, custom_replica_folder, log)
 
-    folder_sync.synchronize()
+    folder_sync_test.synchronize()
 
     assert os.path.exists(custom_replica_folder)
     
@@ -89,7 +91,8 @@ def test_synchronize_remove_file(folder_sync: FolderSynchronizer) -> None:
     empty_folder = os.path.join(replica_folder, 'file_removal/folder/')
     os.makedirs(empty_folder)
     empty_file = os.path.join(empty_folder, 'file.txt')
-    open(empty_file, 'w').close()
+    with open(empty_file, 'w', encoding='utf-8'):
+        pass
 
     folder_sync.synchronize()
 
@@ -113,7 +116,8 @@ def test_synchronize_create_file(folder_sync: FolderSynchronizer) -> None:
     folder_name = 'file_creation/folder/folder/'
     os.makedirs(os.path.join(source_folder, folder_name))
     file_name = folder_name + 'file.txt'
-    open(os.path.join(source_folder, file_name), 'w').close()
+    with open(os.path.join(source_folder, file_name), 'w', encoding='utf-8'):
+        pass
 
     folder_sync.synchronize()
 
@@ -125,12 +129,13 @@ def test_synchronize_update_file(folder_sync: FolderSynchronizer) -> None:
     """
     file_name = 'file.txt'
     content = 'test update file'
-    open(os.path.join(replica_folder, file_name), 'w').close()
+    with open(os.path.join(replica_folder, file_name), 'w', encoding='utf-8'):
+        pass
 
-    with open(os.path.join(source_folder, file_name), 'w') as f:
+    with open(os.path.join(source_folder, file_name), 'w', encoding='utf-8') as f:
         f.write(content)
 
     folder_sync.synchronize()
 
-    with open(os.path.join(replica_folder, file_name), 'r') as f:
+    with open(os.path.join(replica_folder, file_name), 'r', encoding='utf-8', ) as f:
         assert f.read() == content

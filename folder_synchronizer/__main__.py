@@ -1,3 +1,6 @@
+"""
+main module
+"""
 import argparse
 import os
 from folder_synchronizer.classes.log import CustomLogger
@@ -30,7 +33,7 @@ def main() -> None:
     Main function to synchronize source and replica folders and log the process.
     """
     args = parse_args()
-    
+
     source_folder = args.sourceDir
     replica_folder = args.replicaDir
     logs_folder = args.logFolder
@@ -44,14 +47,14 @@ def main() -> None:
     log.info(f"Source Folder: {source_folder}")
     log.info(f"Replica Folder: {replica_folder}")
     folder_sync = FolderSynchronizer(source_folder, replica_folder, log)
-    
+
     try:
         log.info("...Starting Synchronization...")
         folder_sync.synchronize()
         log.info("...Folders Synchronized...")
     except Exception as e:
         log.error(f"Error during synchronization: {str(e)}")
-    
+
     log.info("...Ending Synchronization...")
 
 if __name__ == "__main__":
